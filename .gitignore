@@ -1,1 +1,104 @@
+# ==============================
+
+# Multi-Agent Research System
+
+# ==============================
+
+# Python virtual environments
+
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables / secrets
+
 .env
+.env.*
+!.env.example
+
+# Python cache files
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Python packaging
+
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing and coverage
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Jupyter Notebook
+
+.ipynb_checkpoints/
+
+# IDE settings
+
+.vscode/
+.idea/
+
+# OS generated files
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+
+# Temporary files
+
+*.tmp
+*.temp
+
+# Local databases
+
+*.db
+*.sqlite
+*.sqlite3
+
+# Model / ML generated files
+
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.pt
+*.pth
+
+# Cache directories
+
+.cache/
+.cache/*
+tmp/
+temp/
+
+# Streamlit
+
+.streamlit/secrets.toml
+
+# Ruff / mypy / lint caches
+
+.ruff_cache/
+.mypy_cache/
+
+# Local configuration
+
+config.local.*
+settings.local.*
+
+# Backup files
+
+*.bak
+*~

@@ -1,14 +1,44 @@
+import os
+
 from langchain.agents import create_agent
-from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from tools import web_search , scrape_url 
 from dotenv import load_dotenv
+
+from tools import web_search, scrape_url
 
 load_dotenv()
 
-#model setup 
-llm = ChatOpenAI(model = "gpt-4o-mini",temperature=0)
+provider = os.getenv("MODEL_PROVIDER", "openai").lower()
+
+if provider == "mistral":
+    try:
+        from langchain_mistralai import ChatMistralAI
+    except ImportError as exc:
+        raise RuntimeError(
+            "langchain-mistralai is missing. Install it with: pip install langchain-mistralai"
+        ) from exc
+
+    mistral_key = os.getenv("MISTRAL_API_KEY")
+    if not mistral_key:
+        raise ValueError("MISTRAL_API_KEY is not set. Add it to your .env file.")
+
+    llm = ChatMistralAI(
+        model=os.getenv("MISTRAL_MODEL", "mistral-large-latest"),
+        api_key=mistral_key,
+        temperature=0,
+    )
+else:
+    from langchain_openai import ChatOpenAI
+
+    openai_key = os.getenv("OPENAI_API_KEY")
+    if not openai_key:
+        raise ValueError("OPENAI_API_KEY is not set. Add it to your .env file.")
+
+    llm = ChatOpenAI(
+        model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+        temperature=0,
+    )
 
 
 #1st agent 
